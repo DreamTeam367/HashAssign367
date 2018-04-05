@@ -1,6 +1,6 @@
 import java.io.*;
-import java.util.LinkedList;
 
+import java.util.*;
 /**
  * This class implements a hashtable that using chaining for collision handling.
  * Any non-<tt>null</tt> item may be added to a hashtable.  Chains are 
@@ -12,6 +12,8 @@ import java.util.LinkedList;
  * 
  * Note that the hashtable allows duplicate entries.
  */
+
+
 public class HashTable<T> {
     
     /**
@@ -28,8 +30,27 @@ public class HashTable<T> {
      * @throws IllegalArgumentException if <tt>initSize</tt> is less than or 
      *         equal to 0 or if <tt>loadFactor</tt> is less than or equal to 0.0
      **/
+	
+	double loadFactor = 0.0;
+	int numItems = 0; 
+	LinkedList<T>[] hash;
+	int maxLength=0; 
+	boolean chainMatters;
+	
     public HashTable(int initSize, double loadFactor) {
-        
+        if (initSize <= 0 || loadFactor<=0.0){
+        	throw new IllegalArgumentException(); 
+        }
+    	
+    	
+    	
+    	this.hash = (LinkedList<T>[])( new LinkedList[initSize]); 
+    	this.loadFactor = loadFactor; 
+    	chainMatters=false;
+    	
+    	
+    	
+    	
     }
     
     
@@ -50,7 +71,10 @@ public class HashTable<T> {
      *         or if <tt>maxChainLength</tt> is less than or equal to 0.
      **/
     public HashTable(int initSize, double loadFactor, int maxChainLength) {
-        
+    	this.hash = (LinkedList<T>[])( new LinkedList[initSize]); 
+    	this.loadFactor = loadFactor; 
+    	this.maxLength = maxChainLength; 
+    	chainMatters=true;
     }
     
     
@@ -63,7 +87,26 @@ public class HashTable<T> {
      * @return the item if it is found and <tt>null</tt> if not found.
      **/
     public T lookup(T item) {
-        return null;
+    	int index = item.hashCode(); 
+         
+         index = index % this.hash.length; 
+     	
+     	if (index<0){
+     		index = index +this.hash.length; 
+     	}
+     	
+     for(int i =0; i<hash[index].size(); i++){
+    	 if (hash[index].get(i).equals(item)) {
+    	 return item; 
+    	 }
+     
+    	 
+      
+     }	
+    	
+    	return null; 
+    	
+    	
     }
     
     
@@ -90,9 +133,39 @@ public class HashTable<T> {
      * @throws NullPointerException if <tt>item</tt> is <tt>null</tt>.
      **/
     public void insert(T item) {
-        
+        if(item == null){
+        	throw new NullPointerException(); 
+        }
+        if(((numItems + 1)/ this.hash.length)> this.loadFactor){
+        	this.resize(this.hash.length*2 + 1);
+        }
+        int temp = item.hashCode(); 
+       
+        temp = temp % this.hash.length; 
+    	
+    	if (temp<0){
+    		temp = temp+this.hash.length; 
+    	}
+    	if (this.hash[temp].size()+1>this.maxLength && chainMatters){
+    		this.resize(this.hash.length*2 + 1);
+    	}
+    	this.hash[temp].add(item); 
+    	
     }
     
+    private void resize(int size){
+    LinkedList<T>[] tempArray = this.hash; 
+    
+    this.hash = (LinkedList<T>[])( new LinkedList[size]); 
+    for(int i =0; i<tempArray.length;i++){
+    	while(tempArray[i].size()>0 ){
+    		this.insert(tempArray[i].removeFirst()); 
+    	}
+    	
+    	
+    }
+    	
+    }
     
     /**
      * Removes and returns the given item from the hashtable.  If the item is 
@@ -104,8 +177,27 @@ public class HashTable<T> {
      * @return the removed item if it was found and <tt>null</tt> if not found.
      **/
     public T delete(T item) {
-        return null;  
-    }
+    	 int index = item.hashCode(); 
+         
+         index = index % this.hash.length; 
+     	
+     	if (index<0){
+     		index = index +this.hash.length; 
+     	}
+        for(int i =0; i<hash[index].size(); i++){
+       	 if (hash[index].get(i).equals(item)) {
+       	 
+       		 return hash[index].remove(i); 
+       	 }
+        
+       	 
+         
+        }	
+       	
+       	return null; 
+       	
+       	
+       }
     
     
     /**
