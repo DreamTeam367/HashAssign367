@@ -42,14 +42,12 @@ public class HashTable<T> {
         	throw new IllegalArgumentException(); 
         }
     	
-    	
-    	
     	this.hash = (LinkedList<T>[])( new LinkedList[initSize]); 
+    	for(int i = 0; i<hash.length;i++){
+    		hash[i]=new LinkedList<T>();
+    	}
     	this.loadFactor = loadFactor; 
     	chainMatters=false;
-    	
-    	
-    	
     	
     }
     
@@ -72,6 +70,11 @@ public class HashTable<T> {
      **/
     public HashTable(int initSize, double loadFactor, int maxChainLength) {
     	this.hash = (LinkedList<T>[])( new LinkedList[initSize]); 
+    	for(int i = 0; i<hash.length;i++){
+    		hash[i]=new LinkedList<T>();
+    	}
+     
+     	
     	this.loadFactor = loadFactor; 
     	this.maxLength = maxChainLength; 
     	chainMatters=true;
@@ -89,16 +92,16 @@ public class HashTable<T> {
     public T lookup(T item) {
     	int index = item.hashCode(); 
          
-         index = index % this.hash.length; 
+        index = index % this.hash.length; 
      	
      	if (index<0){
      		index = index +this.hash.length; 
      	}
      	
-     for(int i =0; i<hash[index].size(); i++){
+     	for(int i =0; i<hash[index].size(); i++){
     	 if (hash[index].get(i).equals(item)) {
     	 return item; 
-    	 }
+    	}
      
     	 
       
@@ -136,20 +139,23 @@ public class HashTable<T> {
         if(item == null){
         	throw new NullPointerException(); 
         }
+        
         if(((numItems + 1)/ this.hash.length)> this.loadFactor){
         	this.resize(this.hash.length*2 + 1);
         }
+        
         int temp = item.hashCode(); 
-       
         temp = temp % this.hash.length; 
-    	
     	if (temp<0){
     		temp = temp+this.hash.length; 
     	}
+    	
     	if (this.hash[temp].size()+1>this.maxLength && chainMatters){
     		this.resize(this.hash.length*2 + 1);
     	}
+    	
     	this.hash[temp].add(item); 
+    	numItems++;
     	
     }
     
@@ -157,6 +163,10 @@ public class HashTable<T> {
     LinkedList<T>[] tempArray = this.hash; 
     
     this.hash = (LinkedList<T>[])( new LinkedList[size]); 
+    for(int i = 0; i<hash.length;i++){
+		hash[i]=new LinkedList<T>();
+	}
+ 	numItems=0;
     for(int i =0; i<tempArray.length;i++){
     	while(tempArray[i].size()>0 ){
     		this.insert(tempArray[i].removeFirst()); 
@@ -184,19 +194,14 @@ public class HashTable<T> {
      	if (index<0){
      		index = index +this.hash.length; 
      	}
+     	
         for(int i =0; i<hash[index].size(); i++){
-       	 if (hash[index].get(i).equals(item)) {
-       	 
-       		 return hash[index].remove(i); 
-       	 }
-        
-       	 
-         
+	       	if (hash[index].get(i).equals(item)) { 
+	       		 return hash[index].remove(i); 
+	       	} 
         }	
        	
        	return null; 
-       	
-       	
        }
     
     
@@ -210,6 +215,22 @@ public class HashTable<T> {
      * @param out the place to print all the output.
      **/
     public void dump(PrintStream out) {
+    	out.println("Hashtable contents:");
+    	
+    	for(int i =0; i<hash.length;i++){
+    		if(hash[i].size() != 0){
+    			out.print(i+": [");
+	    		Iterator<T> indexItr = hash[i].iterator();
+	    		if(indexItr.hasNext()){
+	    			out.print(indexItr.next());
+	    		}
+	    		while(indexItr.hasNext()){
+	    			
+	    			out.print("," + indexItr.next());
+	    		}
+	    		out.println("]");
+    		}
+    	}
 
     }
     
@@ -229,6 +250,34 @@ public class HashTable<T> {
      * @param out the place to print all the output.
      **/
     public void displayStats(PrintStream out) {
+    	out.println("Hashtable statistics:");
+        out.println("  current table size:       " + hash.length);
+        out.println("  # items in table:         " + numItems);
+        double loadFactor = (double)numItems/hash.length;
+        out.println("  current load factor:      " + loadFactor);
         
+        int maxChainLength=0;
+        int sumChain=0;
+        int numNonZero=0;
+        int numZero=0;
+        
+        for(int i=0;i<hash.length;i++){
+        	if(hash[i].size()==0){
+        		numZero++;
+        	} else{
+        		sumChain = sumChain + hash[i].size();
+        		numNonZero++;
+        		if(maxChainLength<hash[i].size()){
+        			maxChainLength=hash[i].size();
+        		}
+        		
+        	}
+        }
+        
+        out.println("  longest chain length:     " + maxChainLength);
+        out.println("  # 0-length chains:        " + numZero);
+        
+        double avg = ((double)sumChain)/numNonZero;
+        out.println("  avg (non-0) chain length: "+ avg);
     }
 }
