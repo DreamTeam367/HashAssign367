@@ -1,13 +1,8 @@
-
-TTTTTTEEEESSST
-
-
-
 /*******************************************************************************
 File:             Questions.txt
 
-Author:           <your name and CS login>
-                  <your partner's name and CS login, if pair programming>
+Author:           Julien Oxenham oxenham@wisc.edu
+                  Sam Peters speters9@wisc.edu
 
 Completion Date:  <date you completed this source file>
 
@@ -22,20 +17,21 @@ of nodes with references to the head and the tail.
 what is the hashCode() returned?  By trying a few values you can quickly figure 
 out what it does.  
 
-Answer:
+Answer: It returns the primitive integer of the Integer object. 
 
 
 2) Suppose you insert an item into your hashtable and then immediately do a 
 lookup on that item.  What is the worst-case complexity of your program in this
 situation?  Briefly explain your answer.
 
-Answer:
+Answer:O(N) without max chain length, O(max chain length) otherwise. When you call lookup(), it hashes the item and pulls up the list the 
+item should be in, so then complexity depends on the max items that could be in that list. 
 
 
 3) What is the worst-case complexity of your dump() method?  Briefly explain
 your answer, making sure to identify the problem size(s).
 
-Answer:
+Answer: O(size of array) or O(N) whichever is larger depending on load factor.
 
 
 4) In this question you will run TestHash four times using the parameters 
@@ -57,6 +53,46 @@ where filename can be any file you want.
 What are the hashtable statistics for each of the runs?  
 
 Answer:
+Run1:
+
+Hashtable statistics:
+  current table size:       60
+  # items in table:         439
+  current load factor:      7.316666666666666
+  longest chain length:     14
+  # 0-length chains:        0
+  avg (non-0) chain length: 7.316666666666666
+
+Run2:
+
+Hashtable statistics:
+  current table size:       61
+  # items in table:         439
+  current load factor:      7.19672131147541
+  longest chain length:     14
+  # 0-length chains:        0
+  avg (non-0) chain length: 7.19672131147541
+
+Run3:
+
+Hashtable statistics:
+  current table size:       60
+  # items in table:         439
+  current load factor:      7.316666666666666
+  longest chain length:     22
+  # 0-length chains:        40
+  avg (non-0) chain length: 21.95
+
+Run4:
+
+Hashtable statistics:
+  current table size:       61
+  # items in table:         439
+  current load factor:      7.19672131147541
+  longest chain length:     8
+  # 0-length chains:        0
+  avg (non-0) chain length: 7.19672131147541
+
 
 
 5) In this question you will again run TestHash four times, this time using the 
@@ -78,6 +114,83 @@ where filename can be any file you want.
 What are the hashtable statistics for each of the runs?  
 
 Answer:
+Run5:
+
+Hashtable statistics:
+  current table size:       487
+  # items in table:         439
+  current load factor:      0.9014373716632443
+  longest chain length:     5
+  # 0-length chains:        194
+  avg (non-0) chain length: 1.4982935153583619
+
+Run6:
+
+Hashtable statistics:
+  current table size:       495
+  # items in table:         439
+  current load factor:      0.8868686868686869
+  longest chain length:     5
+  # 0-length chains:        208
+  avg (non-0) chain length: 1.529616724738676
+
+Run7:
+
+Hashtable statistics:
+  current table size:       487
+  # items in table:         439
+  current load factor:      0.9014373716632443
+  longest chain length:     1
+  # 0-length chains:        48
+  avg (non-0) chain length: 1.0
+
+Run8:
+
+Hashtable statistics:
+  current table size:       495
+  # items in table:         439
+  current load factor:      0.8868686868686869
+  longest chain length:     3
+  # 0-length chains:        330
+
+Run9:
+
+Hashtable statistics:
+  current table size:       47
+  # items in table:         439
+  current load factor:      9.340425531914894
+  longest chain length:     17
+  # 0-length chains:        0
+  avg (non-0) chain length: 9.340425531914894
+Run10:
+
+Hashtable statistics:
+  current table size:       767
+  # items in table:         439
+  current load factor:      0.5723598435462842
+  longest chain length:     4
+  # 0-length chains:        429
+  avg (non-0) chain length: 1.2988165680473374
+
+Run11:
+
+Hashtable statistics:
+  current table size:       767
+  # items in table:         439
+  current load factor:      0.5723598435462842
+  longest chain length:     4
+  # 0-length chains:        429
+  avg (non-0) chain length: 1.2988165680473374
+
+Run12:
+
+Hashtable statistics:
+  current table size:       767
+  # items in table:         439
+  current load factor:      0.5723598435462842
+  longest chain length:     4
+  # 0-length chains:        429
+  avg (non-0) chain length: 1.2988165680473374
 
 
 6) In this question you will again run TestHash four times, this time using the 
