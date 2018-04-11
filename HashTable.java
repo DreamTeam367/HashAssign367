@@ -1,6 +1,50 @@
 import java.io.*;
 
 import java.util.*;
+
+///////////////////////////////////////////////////////////////////////////////
+//ALL STUDENTS COMPLETE THESE SECTIONS
+//Title:            Program 4, Hash Table
+//Files:            Questions.txt;
+//Semester:         (course) Spring 2018
+//
+//Author:           Julien Oxenham
+//Email:           oxenham@wisc.edu
+//CS Login:         oxenham
+//Lecturer's Name:  Fischer
+//Lab Section:      N/A
+//
+////////////////////PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+//CHECK ASSIGNMENT PAGE TO see IF PAIR-PROGRAMMING IS ALLOWED
+//If pair programming is allowed:
+//1. Read PAIR-PROGRAMMING policy (in cs302 policy) 
+//2. choose a partner wisely
+//3. REGISTER THE TEAM BEFORE YOU WORK TOGETHER 
+//a. one partner creates the team
+//b. the other partner must join the team
+//4. complete this section for each program file.
+//
+//Pair Partner:     Sam Peters
+//Email:            speters9@wisc.edu
+//Lecturer's Name:  Fischer
+//Lab Section:      N/A
+//
+////////////////////STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//must fully acknowledge and credit those sources of help.
+//Instructors and TAs do not have to be credited here,
+//but tutors, roommates, relatives, strangers, etc do.
+//
+//Persons:          Identify persons by name, relationship to you, and email.
+//Describe in detail the the ideas and help they provided.
+//
+//Online sources:   avoid web searches to solve your problems, but if you do
+//search, be sure to include Web URLs and description of 
+//of any information you find.
+//Source: Readings on relevant subjects- cs 367 webpage. 
+////////////////////////////80 columns wide //////////////////////////////////
+
+
 /**
  * This class implements a hashtable that using chaining for collision handling.
  * Any non-<tt>null</tt> item may be added to a hashtable.  Chains are 
@@ -16,7 +60,15 @@ import java.util.*;
 
 public class HashTable<T> {
     
-    /**
+	//intialize variable for table
+	double loadFactor = 0.0;
+	int numItems = 0; 
+	LinkedList<T>[] hash;
+	int maxLength=0; 
+	boolean chainMatters;
+	
+	
+	 /**
      * Constructs an empty hashtable with the given initial size, maximum load
      * factor, and no maximum chain length.  The load factor should be a real 
      * number greater than 0.0 (not a percentage).  For example, to create a 
@@ -30,14 +82,7 @@ public class HashTable<T> {
      * @throws IllegalArgumentException if <tt>initSize</tt> is less than or 
      *         equal to 0 or if <tt>loadFactor</tt> is less than or equal to 0.0
      **/
-	
-	double loadFactor = 0.0;
-	int numItems = 0; 
-	LinkedList<T>[] hash;
-	int maxLength=0; 
-	boolean chainMatters;
-	
-    public HashTable(int initSize, double loadFactor) {
+    public HashTable(int initSize, double loadFactor) { 
         if (initSize <= 0 || loadFactor<=0.0){
         	throw new IllegalArgumentException(); 
         }
@@ -99,17 +144,11 @@ public class HashTable<T> {
      	}
      	
      	for(int i =0; i<hash[index].size(); i++){
-    	 if (hash[index].get(i).equals(item)) {
-    	 return item; 
-    	}
-     
-    	 
-      
-     }	
-    	
-    	return null; 
-    	
-    	
+	    	 if (hash[index].get(i).equals(item)) {
+	    		 return item; 
+	    	}
+     	}	
+    	return null; 	
     }
     
     
@@ -140,7 +179,7 @@ public class HashTable<T> {
         	throw new NullPointerException(); 
         }
         
-        if(((numItems + 1)/ this.hash.length)> this.loadFactor){
+        if( (((double)(numItems + 1))/ this.hash.length)> this.loadFactor){
         	this.resize(this.hash.length*2 + 1);
         }
         
@@ -156,25 +195,24 @@ public class HashTable<T> {
     	
     	this.hash[temp].add(item); 
     	numItems++;
-    	
     }
+    
     
     private void resize(int size){
-    LinkedList<T>[] tempArray = this.hash; 
-    
-    this.hash = (LinkedList<T>[])( new LinkedList[size]); 
-    for(int i = 0; i<hash.length;i++){
-		hash[i]=new LinkedList<T>();
-	}
- 	numItems=0;
-    for(int i =0; i<tempArray.length;i++){
-    	while(tempArray[i].size()>0 ){
-    		this.insert(tempArray[i].removeFirst()); 
-    	}
-    	
-    	
-    }
-    	
+	    LinkedList<T>[] tempArray = this.hash; 
+	    
+	    this.hash = (LinkedList<T>[])( new LinkedList[size]); 
+	    
+	    for(int i = 0; i<hash.length;i++){
+			hash[i]=new LinkedList<T>();
+		}
+	    
+	 	numItems=0;
+	    for(int i =0; i<tempArray.length;i++){
+	    	while(tempArray[i].size()>0 ){
+	    		this.insert(tempArray[i].removeFirst()); 
+	    	}
+	    }	
     }
     
     /**
@@ -187,9 +225,9 @@ public class HashTable<T> {
      * @return the removed item if it was found and <tt>null</tt> if not found.
      **/
     public T delete(T item) {
-    	 int index = item.hashCode(); 
+    	int index = item.hashCode(); 
          
-         index = index % this.hash.length; 
+        index = index % this.hash.length; 
      	
      	if (index<0){
      		index = index +this.hash.length; 
@@ -250,6 +288,7 @@ public class HashTable<T> {
      * @param out the place to print all the output.
      **/
     public void displayStats(PrintStream out) {
+    	
     	out.println("Hashtable statistics:");
         out.println("  current table size:       " + hash.length);
         out.println("  # items in table:         " + numItems);

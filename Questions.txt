@@ -4,7 +4,7 @@ File:             Questions.txt
 Author:           Julien Oxenham oxenham@wisc.edu
                   Sam Peters speters9@wisc.edu
 
-Completion Date:  <date you completed this source file>
+Completion Date:  <4/10/18>
 
 Course:           CS 367, Fall 2016 
 *******************************************************************************/
@@ -31,7 +31,7 @@ item should be in, so then complexity depends on the max items that could be in 
 3) What is the worst-case complexity of your dump() method?  Briefly explain
 your answer, making sure to identify the problem size(s).
 
-Answer: O(size of array) or O(N) whichever is larger depending on load factor.
+Answer: O(size of table + N items) because each list in the table must be checked with the potential for N items being in 1 list.
 
 
 4) In this question you will run TestHash four times using the parameters 
@@ -55,6 +55,13 @@ What are the hashtable statistics for each of the runs?
 Answer:
 Run1:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 10.0
+  initial size of hash table: 60
+  max chain length: none
+  output file name: run1
 Hashtable statistics:
   current table size:       60
   # items in table:         439
@@ -65,6 +72,13 @@ Hashtable statistics:
 
 Run2:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 10.0
+  initial size of hash table: 61
+  max chain length: none
+  output file name: run2
 Hashtable statistics:
   current table size:       61
   # items in table:         439
@@ -75,6 +89,13 @@ Hashtable statistics:
 
 Run3:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 10.0
+  initial size of hash table: 60
+  max chain length: none
+  output file name: run3
 Hashtable statistics:
   current table size:       60
   # items in table:         439
@@ -85,6 +106,13 @@ Hashtable statistics:
 
 Run4:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 10.0
+  initial size of hash table: 61
+  max chain length: none
+  output file name: run4
 Hashtable statistics:
   current table size:       61
   # items in table:         439
@@ -116,81 +144,71 @@ What are the hashtable statistics for each of the runs?
 Answer:
 Run5:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 0.8
+  initial size of hash table: 60
+  max chain length: none
+  output file name: run5
 Hashtable statistics:
-  current table size:       487
+  current table size:       975
   # items in table:         439
-  current load factor:      0.9014373716632443
-  longest chain length:     5
-  # 0-length chains:        194
-  avg (non-0) chain length: 1.4982935153583619
+  current load factor:      0.4502564102564103
+  longest chain length:     4
+  # 0-length chains:        616
+  avg (non-0) chain length: 1.222841225626741
 
 Run6:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 0.8
+  initial size of hash table: 61
+  max chain length: none
+  output file name: run6
 Hashtable statistics:
-  current table size:       495
+  current table size:       991
   # items in table:         439
-  current load factor:      0.8868686868686869
-  longest chain length:     5
-  # 0-length chains:        208
-  avg (non-0) chain length: 1.529616724738676
+  current load factor:      0.4429868819374369
+  longest chain length:     4
+  # 0-length chains:        638
+  avg (non-0) chain length: 1.2436260623229463
 
 Run7:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 0.8
+  initial size of hash table: 60
+  max chain length: none
+  output file name: run7
 Hashtable statistics:
-  current table size:       487
+  current table size:       975
   # items in table:         439
-  current load factor:      0.9014373716632443
-  longest chain length:     1
-  # 0-length chains:        48
-  avg (non-0) chain length: 1.0
+  current load factor:      0.4502564102564103
+  longest chain length:     2
+  # 0-length chains:        650
+  avg (non-0) chain length: 1.3507692307692307
 
 Run8:
 
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 0.8
+  initial size of hash table: 61
+  max chain length: none
+  output file name: run8
 Hashtable statistics:
-  current table size:       495
+  current table size:       991
   # items in table:         439
-  current load factor:      0.8868686868686869
-  longest chain length:     3
-  # 0-length chains:        330
-
-Run9:
-
-Hashtable statistics:
-  current table size:       47
-  # items in table:         439
-  current load factor:      9.340425531914894
-  longest chain length:     17
-  # 0-length chains:        0
-  avg (non-0) chain length: 9.340425531914894
-Run10:
-
-Hashtable statistics:
-  current table size:       767
-  # items in table:         439
-  current load factor:      0.5723598435462842
-  longest chain length:     4
-  # 0-length chains:        429
-  avg (non-0) chain length: 1.2988165680473374
-
-Run11:
-
-Hashtable statistics:
-  current table size:       767
-  # items in table:         439
-  current load factor:      0.5723598435462842
-  longest chain length:     4
-  # 0-length chains:        429
-  avg (non-0) chain length: 1.2988165680473374
-
-Run12:
-
-Hashtable statistics:
-  current table size:       767
-  # items in table:         439
-  current load factor:      0.5723598435462842
-  longest chain length:     4
-  # 0-length chains:        429
-  avg (non-0) chain length: 1.2988165680473374
+  current load factor:      0.4429868819374369
+  longest chain length:     1
+  # 0-length chains:        552
+  avg (non-0) chain length: 1.0
 
 
 6) In this question you will again run TestHash four times, this time using the 
@@ -206,6 +224,74 @@ What are the hashtable statistics for each of the runs?
 
 Answer:
 
+Run9:
+
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 10.0
+  initial size of hash table: 11
+  max chain length: none
+  output file name: run9
+Hashtable statistics:
+  current table size:       47
+  # items in table:         439
+  current load factor:      9.340425531914894
+  longest chain length:     17
+  # 0-length chains:        0
+  avg (non-0) chain length: 9.340425531914894
+
+Run10:
+
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 10.0
+  initial size of hash table: 11
+  max chain length: 5
+  output file name: run10
+Hashtable statistics:
+  current table size:       767
+  # items in table:         439
+  current load factor:      0.5723598435462842
+  longest chain length:     4
+  # 0-length chains:        429
+  avg (non-0) chain length: 1.2988165680473374
+
+Run11:
+
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 0.8
+  initial size of hash table: 11
+  max chain length: none
+  output file name: run11
+Hashtable statistics:
+  current table size:       767
+  # items in table:         439
+  current load factor:      0.5723598435462842
+  longest chain length:     4
+  # 0-length chains:        429
+  avg (non-0) chain length: 1.2988165680473374
+
+Run12:
+
+Parameters used:
+  # items to hash: 439
+  random # seed: 323232
+  max load factor: 0.8
+  initial size of hash table: 11
+  max chain length: 5
+  output file name: run12
+Hashtable statistics:
+  current table size:       767
+  # items in table:         439
+  current load factor:      0.5723598435462842
+  longest chain length:     4
+  # 0-length chains:        429
+  avg (non-0) chain length: 1.2988165680473374
+
 
 7) Briefly analyze your results from questions 4, 5, and 6.  Your analysis 
 should consider the following (in relation to the final distribution of the 
@@ -217,3 +303,5 @@ hashtable):
 and describe how they are related.
 
 Answer:
+
+Analyzing runs 1-4, the interesting results came from the hash table loaded with 3*k values. When the table size was 60 and not prime in Run 3, the longest chain was 22 with an average chain of 21.95. Contrast this with run4 that that had a prime table size of 61, and a much better distribution with a longest chain of 8 and an average chain of 7.19. This likely results from multiples of 3 mod 61 falling into many different buckets than multiples of 3 mod 60, where 60 has 3 as a factor. Contrasting run1 with random input data and run3 with input data that was a multiple of 3, we found that the random data outperformed the multiples of 3 data in table distribution. This result was replicated in trials 5-8 because the table sizes were very large upon completion and there were few repeat values when mod table size was taken.In run 8 we again see that a prime table size leads to a well distributed table where the average and max chain length was 1 with a table size of 991.Finally, in runs 9-12 we are able to analyze the impact of max chain length and max laod factor in table distribution. In run 9 when the max load factor was 10 and there was no max chain length, the table was very poorly distributed with a max chain length of 17 and an average of 9.34. In runs 10-12 where there was either a max load factor of .8 or a max chain length of 5 or both, the table were relatively well distributed with an average of 1.3 and a max chain length of 4.
